@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.ApplicationScope;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 //@RequestScope
@@ -30,5 +31,10 @@ public class ContactService {
         contactRepository.saveContactMsg(contact);
         log.info(contact.toString());
         return isSaved;
+    }
+
+    public List<Contact> findMsgsWithOpenStatus() {
+        List<Contact> contactMsgs = contactRepository.findMsgsWithStatus(Constants.OPEN);
+        return contactMsgs;
     }
 }

@@ -1,10 +1,16 @@
 package com.escuela.colegio.Repository;
 
+import com.eazybytes.eazyschool.rommappers.ContactRowMapper;
 import com.escuela.colegio.Model.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
 
 /*
 @Repository stereotype annotation is used to add a bean of this class
@@ -31,14 +37,14 @@ public class ContactRepository {
                 contact.getStatus(), contact.getCreatedAt(), contact.getCreatedBy());
     }
 
-//    public List<Contact> findMsgsWithStatus(String status) {
-//        String sql = "SELECT * FROM CONTACT_MSG WHERE STATUS = ?";
-//        return jdbcTemplate.query(sql,new PreparedStatementSetter() {
-//            public void setValues(PreparedStatement preparedStatement) throws SQLException {
-//                preparedStatement.setString(1, status);
-//            }
-//        },new ContactRowMapper());
-//    }
+    public List<Contact> findMsgsWithStatus(String status) {
+        String sql = "SELECT * FROM CONTACT_MSG WHERE STATUS = ?";
+        return jdbcTemplate.query(sql,new PreparedStatementSetter() {
+            public void setValues(PreparedStatement preparedStatement) throws SQLException {
+                preparedStatement.setString(1, status);
+            }
+        },new ContactRowMapper());
+    }
 //
 //    public int updateMsgStatus(int contactId, String status,String updatedBy) {
 //        String sql = "UPDATE CONTACT_MSG SET STATUS = ?, UPDATED_BY = ?,UPDATED_AT =? WHERE CONTACT_ID = ?";
