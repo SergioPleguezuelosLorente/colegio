@@ -1,12 +1,15 @@
 package com.escuela.colegio.service;
 
 import com.escuela.colegio.Model.Contact;
+import com.escuela.colegio.Repository.ContactRepository;
+import com.escuela.colegio.config.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.ApplicationScope;
-import org.springframework.web.context.annotation.RequestScope;
-import org.springframework.web.context.annotation.SessionScope;
+
+import java.time.LocalDateTime;
 
 @Service
 //@RequestScope
@@ -14,22 +17,18 @@ import org.springframework.web.context.annotation.SessionScope;
 @ApplicationScope
 public class ContactService {
 
-    private int counter = 0;
+    @Autowired
+    private ContactRepository contactRepository;
 
     private static Logger log = LoggerFactory.getLogger(ContactService.class);
 
     public boolean saveMessageDetails(Contact contact) {
-        boolean isSaved = true;
-        //TODO añadir esto a base de datos
+        boolean isSaved = false;
+        contact.setStatus(Constants.OPEN);
+        contact.setCreatedBy(Constants.ANONYMOUS);
+        contact.setCreatedAt(LocalDateTime.now());
+        contactRepository.saveContactMsg(contact);
         log.info(contact.toString());
         return isSaved;
-    }
-
-    public int getCounter() {
-        return counter;
-    }
-
-    public void setCounter(int counter) {
-        this.counter = counter;
     }
 }
