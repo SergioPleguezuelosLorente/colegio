@@ -1,4 +1,4 @@
-package com.eazybytes.eazyschool.rommappers;
+package com.escuela.colegio.rommapers;
 
 import com.escuela.colegio.Model.Contact;
 import org.springframework.jdbc.core.RowMapper;
