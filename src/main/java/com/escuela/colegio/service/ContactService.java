@@ -1,6 +1,7 @@
 package com.escuela.colegio.service;
 
 import com.escuela.colegio.Model.Contact;
+import com.escuela.colegio.Model.Holiday;
 import com.escuela.colegio.Repository.ContactRepository;
 import com.escuela.colegio.config.Constants;
 import org.slf4j.Logger;
