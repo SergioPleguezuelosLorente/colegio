@@ -1,11 +1,11 @@
-package com.escuela.colegio.rommapers;
+package com.escuela.colegio.DEPRECATED.rommapers;
 
 import com.escuela.colegio.Model.Contact;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+@Deprecated
 public class ContactRowMapper implements RowMapper<Contact> {
 
     @Override

@@ -1,5 +1,6 @@
 package com.escuela.colegio.Model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -8,23 +9,39 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Entity
+@Table(name="contact_msg")
 public class Contact extends BaseEntity{
-
+    @Id
+    @Column(name = "contact_id")
     private int contactId;
+
+    @Column(name="status")
     private String status;
 
+    //No es necesario hacero ya que el nombre en base de datos y en el modelo coinciden,
+    // pero lo añado para tenerlo como plantilla para futuras clases
+    @Column(name="name")
     @NotNull(message = "Name must not be blank")
     @Size(min=3, message = "Name must be at least 3 characters long")
     private String name;
+
+    @Column(name="mobile_num")
     @NotNull(message = "Mobile number must not be blank")
     @Pattern(regexp="(^$|[0-9]{9})", message = "Invalid mobile phone number")
     private String mobileNum;
+
+    @Column(name="email")
     @NotNull(message = "Email must not be blank")
     @Email(message = "Please provide a valid email address")
     private String email;
+
+    @Column(name="subject")
     @NotNull(message = "Subject must not be blank")
     @Size(min=5, message = "Subject must be at least 5 caracters long")
     private String subject;
+
+    @Column(name="message")
     @NotNull(message = "Message must not be blank")
     @Size(min=10, message = "Message must be at least 10 caracters long")
     private String message;

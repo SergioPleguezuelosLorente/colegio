@@ -1,11 +1,23 @@
 package com.escuela.colegio.Model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Entity
+@Table(name="holidays")
 public class Holiday extends BaseEntity {
+
+    @Id
+    @Column(name="day")
     private String day;
+
+    @Column(name="reason")
     private String reason;
+
+    @Column(name="type")
+    @Enumerated(EnumType.STRING)
     private Type type;
 
 

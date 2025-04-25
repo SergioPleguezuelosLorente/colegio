@@ -1,7 +1,6 @@
 package com.escuela.colegio.service;
 
 import com.escuela.colegio.Model.Contact;
-import com.escuela.colegio.Model.Holiday;
 import com.escuela.colegio.Repository.ContactRepository;
 import com.escuela.colegio.config.Constants;
 import org.slf4j.Logger;
@@ -12,6 +11,7 @@ import org.springframework.web.context.annotation.ApplicationScope;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 //@RequestScope
@@ -29,21 +29,46 @@ public class ContactService {
         contact.setStatus(Constants.OPEN);
         contact.setCreatedBy(Constants.ANONYMOUS);
         contact.setCreatedAt(LocalDateTime.now());
-        contactRepository.saveContactMsg(contact);
+        Contact savedContact = contactRepository.save(contact);
+        if (null != savedContact && savedContact.getContactId() > 0) {
+            isSaved = true;
+        }
+        //DEPRECATED
+        //JDBC example:
+//        int result = contactRepository.saveContactMsg(contact);
+//        if (result > 0) {
+//            isSaved = true;
+//        }
         log.info(contact.toString());
         return isSaved;
     }
 
     public List<Contact> findMsgsWithOpenStatus() {
-        List<Contact> contactMsgs = contactRepository.findMsgsWithStatus(Constants.OPEN);
+        List<Contact> contactMsgs = contactRepository.findByStatus(Constants.OPEN);
+        //DEPRECATED
+        //JDBC example:
+//        List<Contact> contactMsgs = contactRepository.findMsgsWithStatus(Constants.OPEN);
         return contactMsgs;
     }
 
     public boolean updateMsgStatus(int id, String updateBy) {
-        int result = contactRepository.updateMsgStatus(id, Constants.CLOSE, updateBy);
-        if (result > 0 ) {
-            return true;
+        boolean isUpdated = false;
+        Optional<Contact> contact = contactRepository.findById(id);
+        contact.ifPresent((contact1 -> {
+            contact1.setStatus(Constants.CLOSE);
+            contact1.setUpdatedBy(updateBy);
+            contact1.setUpdatedAt(LocalDateTime.now());
+        }));
+        Contact updatedContact = contactRepository.save(contact.get());
+        if (null != updatedContact && updatedContact.getUpdatedBy() != null) {
+            isUpdated = true;
         }
-        return false;
+        //DEPRECATED
+        //JDBC example:
+//        int result = contactRepository.updateMsgStatus(id, Constants.CLOSE, updateBy);
+//        if (result > 0) {
+//            isUpdated = true;
+//        }
+        return isUpdated;
     }
 }

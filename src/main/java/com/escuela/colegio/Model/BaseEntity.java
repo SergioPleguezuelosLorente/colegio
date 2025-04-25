@@ -1,13 +1,25 @@
 package com.escuela.colegio.Model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@MappedSuperclass
 public class BaseEntity {
 
+
+    @Column(name="created_at")
     private LocalDateTime createdAt;
+
+    @Column(name="created_by")
     private String createdBy;
+
+    @Column(name="updated_at")
     private LocalDateTime updatedAt;
+
+    @Column(name="updated_by")
     private String updatedBy;
 
     public BaseEntity(LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {

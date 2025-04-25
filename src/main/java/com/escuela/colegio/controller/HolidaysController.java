@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Controller
 public class HolidaysController {
@@ -27,7 +28,11 @@ public class HolidaysController {
         } else if (null != display && display.equals("festival")) {
             model.addAttribute("festival", true);
         }
-        List<Holiday> holidays = holidayRepository.findAllHolidays();
+        Iterable<Holiday> holidaysIterable = holidayRepository.findAll();
+        List<Holiday> holidays = StreamSupport.stream(holidaysIterable.spliterator(), false).toList();
+        //DEPRECATED
+        //JDBC example:
+//        List<Holiday> holidays = holidayRepository.findAllHolidays();
         Holiday.Type[] types = Holiday.Type.values();
         for (Holiday.Type type : types) {
             model.addAttribute(type.toString(),
