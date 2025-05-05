@@ -16,15 +16,20 @@ public class LoginController {
 
     @RequestMapping(value = "login", method = {RequestMethod.GET, RequestMethod.POST})
     public String displayLoginPage(@RequestParam(value = "error", required = false) String error,
-                                   @RequestParam(value = "logout", required = false) String logout, Model model) {
+                                   @RequestParam(value = "logout", required = false) String logout,
+                                   @RequestParam(value = "register", required = false) String register,
+                                   Model model) {
         String errorMessage = null;
         String logoutMessage = null;
         if (error != null) {
             errorMessage = "Username or Password is incorrect!";
         }
-        if (logout != null) {
+        else if (logout != null) {
             logoutMessage = "You have been sucessfully logged out!";
             errorMessage = null;
+        }
+        else if (register != null) {
+            errorMessage = "You registration has been successful! Login with registerted credentials.";
         }
         model.addAttribute("logoutMessage", logoutMessage);
         model.addAttribute("errorMessage", errorMessage);
