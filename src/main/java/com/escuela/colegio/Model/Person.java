@@ -8,6 +8,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDateTime;
+
 @Entity
 @FieldsValueMatch.List({
         @FieldsValueMatch(
@@ -21,11 +23,12 @@ import jakarta.validation.constraints.Size;
                 message = "Email addresses do not match!"
         )
 })
-
-public class Person extends BaseEntity{
+@Table(name="person")
+public class Person extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "person_id")
     private int personId;
 
     @NotBlank(message = "Name must not be blank")
@@ -33,7 +36,8 @@ public class Person extends BaseEntity{
     private String name;
 
     @NotBlank(message = "Mobile number must not be blank")
-    @Pattern(regexp="(^$|[0-9]{9})", message = "Mobile number must be 9 digits")
+    @Pattern(regexp = "(^$|[0-9]{9})", message = "Mobile number must be 9 digits")
+    @Column(name = "mobile_number")
     private String mobileNumber;
 
     @NotBlank(message = "Email must not be blank")
@@ -54,6 +58,30 @@ public class Person extends BaseEntity{
     @Size(min = 5, message = "Please, confirm your password correctly")
     @Transient
     private String confirmPwd;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, targetEntity = Roles.class)
+    @JoinColumn(name = "roleId", referencedColumnName = "role_id", nullable = false)
+    private Roles roles;
+
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, targetEntity = Address.class)
+    @JoinColumn(name = "addressId", referencedColumnName = "address_id", nullable = true)
+    private Address address;
+
+    public Person() {
+    }
+
+    public Person(LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy, int personId, String name, String mobileNumber, String email, String confirmEmail, String pwd, String confirmPwd, Roles roles, Address address) {
+        super(createdAt, createdBy, updatedAt, updatedBy);
+        this.personId = personId;
+        this.name = name;
+        this.mobileNumber = mobileNumber;
+        this.email = email;
+        this.confirmEmail = confirmEmail;
+        this.pwd = pwd;
+        this.confirmPwd = confirmPwd;
+        this.roles = roles;
+        this.address = address;
+    }
 
     public int getPersonId() {
         return personId;
@@ -109,5 +137,21 @@ public class Person extends BaseEntity{
 
     public void setConfirmPwd(String confirmPwd) {
         this.confirmPwd = confirmPwd;
+    }
+
+    public Roles getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Roles roles) {
+        this.roles = roles;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

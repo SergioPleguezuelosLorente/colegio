@@ -1,11 +1,10 @@
 package com.escuela.colegio.Repository;
 
-import com.escuela.colegio.Model.Roles;
+
+import com.escuela.colegio.Model.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RolesRepository extends JpaRepository<Roles, Integer> {
-
-    Roles getByRoleName(String roleName);
+public interface PersonRepository extends JpaRepository<Person, Integer> {
 }

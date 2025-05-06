@@ -3,6 +3,7 @@ package com.escuela.colegio.Model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name="roles")
 public class Roles extends BaseEntity{
 
     @Id
@@ -11,7 +12,7 @@ public class Roles extends BaseEntity{
     private int roleId;
 
     @Column(name="role_name")
-    private String rolename;
+    private String roleName;
 
     public int getRoleId() {
         return roleId;
@@ -22,10 +23,10 @@ public class Roles extends BaseEntity{
     }
 
     public String getRolename() {
-        return rolename;
+        return roleName;
     }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
+    public void setRolename(String roleName) {
+        this.roleName = roleName;
     }
 }
