@@ -1,7 +1,7 @@
 package com.escuela.colegio.controller;
 
-import com.escuela.colegio.Model.Holiday;
-import com.escuela.colegio.Repository.HolidayRepository;
+import com.escuela.colegio.model.Holiday;
+import com.escuela.colegio.repository.HolidayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,8 +1,8 @@
 package com.escuela.colegio.security;
 
-import com.escuela.colegio.Model.Person;
-import com.escuela.colegio.Model.Roles;
-import com.escuela.colegio.Repository.PersonRepository;
+import com.escuela.colegio.model.Person;
+import com.escuela.colegio.model.Roles;
+import com.escuela.colegio.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

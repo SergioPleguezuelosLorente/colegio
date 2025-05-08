@@ -1,4 +1,4 @@
-package com.escuela.colegio.Model;
+package com.escuela.colegio.model;
 
 import com.escuela.colegio.annotation.FieldsValueMatch;
 import com.escuela.colegio.annotation.PasswordValidator;

@@ -1,6 +1,6 @@
-package com.escuela.colegio.Repository;
+package com.escuela.colegio.repository;
 
-import com.escuela.colegio.Model.Holiday;
+import com.escuela.colegio.model.Holiday;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

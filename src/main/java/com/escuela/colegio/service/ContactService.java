@@ -1,7 +1,7 @@
 package com.escuela.colegio.service;
 
-import com.escuela.colegio.Model.Contact;
-import com.escuela.colegio.Repository.ContactRepository;
+import com.escuela.colegio.model.Contact;
+import com.escuela.colegio.repository.ContactRepository;
 import com.escuela.colegio.config.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

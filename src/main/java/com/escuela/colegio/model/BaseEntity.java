@@ -1,4 +1,4 @@
-package com.escuela.colegio.Model;
+package com.escuela.colegio.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

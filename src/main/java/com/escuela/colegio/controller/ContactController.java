@@ -1,6 +1,6 @@
 package com.escuela.colegio.controller;
 
-import com.escuela.colegio.Model.Contact;
+import com.escuela.colegio.model.Contact;
 import com.escuela.colegio.service.ContactService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;

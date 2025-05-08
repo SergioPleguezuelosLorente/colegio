@@ -1,6 +1,6 @@
 package com.escuela.colegio.DEPRECATED.rommapers;
 
-import com.escuela.colegio.Model.Contact;
+import com.escuela.colegio.model.Contact;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

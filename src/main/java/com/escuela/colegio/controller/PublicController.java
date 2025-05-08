@@ -1,6 +1,6 @@
 package com.escuela.colegio.controller;
 
-import com.escuela.colegio.Model.Person;
+import com.escuela.colegio.model.Person;
 import com.escuela.colegio.service.PersonService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
-package com.escuela.colegio.Repository;
+package com.escuela.colegio.repository;
 
 
-import com.escuela.colegio.Model.Person;
+import com.escuela.colegio.model.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
