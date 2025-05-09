@@ -3,15 +3,15 @@ package com.escuela.colegio.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="roles")
-public class Roles extends BaseEntity{
+@Table(name = "roles")
+public class Roles extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="role_id")
+    @Column(name = "role_id")
     private int roleId;
 
-    @Column(name="role_name")
+    @Column(name = "role_name")
     private String roleName;
 
     public int getRoleId() {

@@ -1,10 +1,10 @@
 package com.escuela.colegio.service;
 
+import com.escuela.colegio.config.Constants;
 import com.escuela.colegio.model.Person;
 import com.escuela.colegio.model.Roles;
 import com.escuela.colegio.repository.PersonRepository;
 import com.escuela.colegio.repository.RolesRepository;
-import com.escuela.colegio.config.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

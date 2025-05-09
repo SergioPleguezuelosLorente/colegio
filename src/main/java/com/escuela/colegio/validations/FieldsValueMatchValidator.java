@@ -1,10 +1,9 @@
 package com.escuela.colegio.validations;
 
 import com.escuela.colegio.annotation.FieldsValueMatch;
-import org.springframework.beans.BeanWrapperImpl;
-
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import org.springframework.beans.BeanWrapperImpl;
 
 public class FieldsValueMatchValidator
         implements ConstraintValidator<FieldsValueMatch, Object> {
@@ -19,7 +18,7 @@ public class FieldsValueMatchValidator
     }
 
     @Override
-    public boolean isValid(Object value,ConstraintValidatorContext context) {
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
         Object fieldValue = new BeanWrapperImpl(value)
                 .getPropertyValue(field);
         Object fieldMatchValue = new BeanWrapperImpl(value)

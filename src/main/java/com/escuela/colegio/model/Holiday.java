@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name="holidays")
+@Table(name = "holidays")
 public class Holiday extends BaseEntity {
 
     @Id

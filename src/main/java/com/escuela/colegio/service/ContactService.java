@@ -1,8 +1,8 @@
 package com.escuela.colegio.service;
 
+import com.escuela.colegio.config.Constants;
 import com.escuela.colegio.model.Contact;
 import com.escuela.colegio.repository.ContactRepository;
-import com.escuela.colegio.config.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

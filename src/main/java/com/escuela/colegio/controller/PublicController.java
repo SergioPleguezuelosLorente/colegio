@@ -25,15 +25,14 @@ public class PublicController {
     }
 
     @RequestMapping(value = "/createUser", method = {RequestMethod.POST})
-    public String createUser(@Valid @ModelAttribute("person") Person person, Errors errors){
-        if(errors.hasErrors()){
+    public String createUser(@Valid @ModelAttribute("person") Person person, Errors errors) {
+        if (errors.hasErrors()) {
             return "register.html";
         }
         boolean isSaved = personService.createNewPerson(person);
         if (isSaved) {
             return "redirect:/login?register=true";
-        }
-        else {
+        } else {
             return "register.html";
         }
     }

@@ -17,19 +17,19 @@ import java.util.Objects;
 public class BaseEntity {
 
     @CreatedDate
-    @Column(name="created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @CreatedBy
-    @Column(name="created_by")
+    @Column(name = "created_by")
     private String createdBy;
 
     @LastModifiedDate
-    @Column(name="updated_at")
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     @LastModifiedBy
-    @Column(name="updated_by")
+    @Column(name = "updated_by")
     private String updatedBy;
 
     public BaseEntity(LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
