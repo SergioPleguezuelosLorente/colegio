@@ -67,10 +67,14 @@ public class Person extends BaseEntity {
     @JoinColumn(name = "addressId", referencedColumnName = "address_id", nullable = true)
     private Address address;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "classId", referencedColumnName = "class_id")
+    private ClassType classType;
+
     public Person() {
     }
 
-    public Person(LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy, int personId, String name, String mobileNumber, String email, String confirmEmail, String pwd, String confirmPwd, Roles roles, Address address) {
+    public Person(LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy, int personId, String name, String mobileNumber, String email, String confirmEmail, String pwd, String confirmPwd, Roles roles, Address address, ClassType classType) {
         super(createdAt, createdBy, updatedAt, updatedBy);
         this.personId = personId;
         this.name = name;
@@ -81,6 +85,7 @@ public class Person extends BaseEntity {
         this.confirmPwd = confirmPwd;
         this.roles = roles;
         this.address = address;
+        this.classType = classType;
     }
 
     public int getPersonId() {
@@ -153,5 +158,13 @@ public class Person extends BaseEntity {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public ClassType getClassType() {
+        return classType;
+    }
+
+    public void setClassType(ClassType classType) {
+        this.classType = classType;
     }
 }
