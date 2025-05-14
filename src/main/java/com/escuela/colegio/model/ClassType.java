@@ -39,4 +39,12 @@ public class ClassType extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Set<Person> getPersonList() {
+        return personList;
+    }
+
+    public void setPersonList(Set<Person> personList) {
+        this.personList = personList;
+    }
 }
