@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
-public class Address extends BaseEntity {
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

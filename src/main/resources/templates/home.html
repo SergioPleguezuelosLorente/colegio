@@ -13,12 +13,13 @@ Author URL: http://w3layouts.com
     <!-- Google fonts -->
     <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- Template CSS Style link -->
-    <link rel="stylesheet" href="assets/css/style-starter.css">
+    <link rel="stylesheet" href="/assets/css/style-starter.css">
 </head>
 
 <body>
-
-    <div th:replace="header :: header"></div>
+    <!-- header -->
+    <div th:replace="~{header :: header}">...</div>
+    <!-- //header -->
 
     <!-- banner section -->
     <section id="home" class="w3l-banner py-5">
@@ -135,7 +136,7 @@ Author URL: http://w3layouts.com
                 </div>
                 <div class="col-md-6 mt-md-0 mt-4">
                     <div class="content23-grid content23-grid2">
-                        <h4><a>Safe Environment</a></h4>
+                        <h4><a th:href="@{/about}">Safe Environment</a></h4>
                     </div>
                 </div>
             </div>
@@ -350,7 +351,9 @@ Author URL: http://w3layouts.com
     </section>
     <!-- //call block -->
 
-    <div th:replace="footer :: footer"></div>
+    <!-- footer block -->
+    <div th:replace="~{footer :: footer}">...</div>
+    <!-- //footer block -->
 
     <!-- Js scripts -->
     <!-- move top -->
@@ -380,15 +383,15 @@ Author URL: http://w3layouts.com
     <!-- //move top -->
 
     <!-- common jquery plugin -->
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/assets/js/jquery-3.3.1.min.js"></script>
     <!-- //common jquery plugin -->
 
     <!-- /counter-->
-    <script src="assets/js/counter.js"></script>
+    <script src="/assets/js/counter.js"></script>
     <!-- //counter-->
 
     <!-- theme switch js (light and dark)-->
-    <script src="assets/js/theme-change.js"></script>
+    <script src="/assets/js/theme-change.js"></script>
     <!-- //theme switch js (light and dark)-->
 
     <!-- MENU-JS -->
@@ -431,7 +434,7 @@ Author URL: http://w3layouts.com
     <!-- //disable body scroll which navbar is in active -->
 
     <!-- bootstrap -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
     <!-- //bootstrap -->
     <!-- //Js scripts -->
 </body>
