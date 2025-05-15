@@ -7,6 +7,7 @@ import com.escuela.colegio.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,8 +48,14 @@ public class AdminController {
     }
 
     @RequestMapping("/addNewClass")
-    public ModelAndView addNewClass(Model model) {
-        ModelAndView modelAndView = new ModelAndView("classes.html");
+    public ModelAndView addNewClass(Model model, @ModelAttribute("classType") ClassType classType) {
+        classesRepository.save(classType);
+        ModelAndView modelAndView = new ModelAndView("redirect:/admin/displayClasses");
+        return modelAndView;
+    }
+
+    public ModelAndView displayStudents(Model model, @RequestParam int classId) {
+        ModelAndView modelAndView = new ModelAndView("students.html");
         return modelAndView;
     }
 }

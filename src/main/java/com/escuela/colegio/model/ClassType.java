@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -23,6 +24,12 @@ public class ClassType extends BaseEntity {
             cascade = CascadeType.PERSIST, targetEntity = Person.class)
     private Set<Person> personList;
 
+    public ClassType() {
+    }
+
+    public ClassType(LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+        super(createdAt, createdBy, updatedAt, updatedBy);
+    }
 
     public int getClassId() {
         return classId;
