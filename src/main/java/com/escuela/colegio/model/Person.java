@@ -73,21 +73,22 @@ public class Person extends BaseEntity {
     @JoinColumn(name = "classId", referencedColumnName = "class_id")
     private ClassType classType;
 
-    @ManyToMany(mappedBy = "person", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable (name ="person_courses",
             joinColumns = {
-                    @JoinColumn(name = "person_id", referencedColumnName = "personId")},
+                    @JoinColumn(name = "personId", referencedColumnName = "person_id")
+            },
             inverseJoinColumns = {
-                    @JoinColumn(name = "course_id", referencedColumnName = "courseId")
+                    @JoinColumn(name = "courseId", referencedColumnName = "course_id")
             }
     )
-    private Set<Person> courses = new HashSet<>();
+    private Set<Courses> courses = new HashSet<>();
 
 
     public Person() {
     }
 
-    public Person(LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy, int personId, String name, String mobileNumber, String email, String confirmEmail, String pwd, String confirmPwd, Roles roles, Address address, ClassType classType, Set<Person> courses) {
+    public Person(LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy, int personId, String name, String mobileNumber, String email, String confirmEmail, String pwd, String confirmPwd, Roles roles, Address address, ClassType classType, Set<Courses> courses) {
         super(createdAt, createdBy, updatedAt, updatedBy);
         this.personId = personId;
         this.name = name;
@@ -183,11 +184,11 @@ public class Person extends BaseEntity {
         this.classType = classType;
     }
 
-    public Set<Person> getCourses() {
+    public Set<Courses> getCourses() {
         return courses;
     }
 
-    public void setCourses(Set<Person> courses) {
+    public void setCourses(Set<Courses> courses) {
         this.courses = courses;
     }
 }

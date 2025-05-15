@@ -1,8 +1,10 @@
 package com.escuela.colegio.controller;
 
 import com.escuela.colegio.model.ClassType;
+import com.escuela.colegio.model.Courses;
 import com.escuela.colegio.model.Person;
 import com.escuela.colegio.repository.ClassesRepository;
+import com.escuela.colegio.repository.CoursesRepository;
 import com.escuela.colegio.repository.PersonRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class AdminController {
 
     @Autowired
     PersonRepository personRepository;
+
+    @Autowired
+    CoursesRepository coursesRepository;
 
     @RequestMapping("/displayClasses")
     public ModelAndView displayClasses(Model model) {
@@ -95,6 +100,32 @@ public class AdminController {
         ClassType classSaved = classesRepository.save(classType);
         httpSession.setAttribute("classType", classSaved);
         ModelAndView modelAndView = new ModelAndView("redirect:/admin/displayStudents?classId=" + classType.getClassId());
+        return modelAndView;
+    }
+
+    @GetMapping("/displayCourses")
+    public ModelAndView displayCourses(Model model) {
+        ModelAndView modelAndView = new ModelAndView("courses_secure.html");
+        List<Courses> courses = coursesRepository.findAll();
+        modelAndView.addObject("courses", courses);
+        model.addAttribute("course", new Courses());
+        return modelAndView;
+    }
+
+    @PostMapping("/addNewCourse")
+    public ModelAndView addNewCourse(Model model, @ModelAttribute("course") Courses courses) {
+        ModelAndView modelAndView = new ModelAndView();
+        coursesRepository.save(courses);
+        modelAndView.setViewName("redirect:/admin/displayCourses");
+        return modelAndView;
+    }
+
+    @GetMapping("/viewStudents")
+    public ModelAndView viewStudents(Model model, @RequestParam int id) {
+        ModelAndView modelAndView = new ModelAndView("course_students.html");
+        Optional<Courses> courses = coursesRepository.findById(id);
+        modelAndView.addObject("courses", courses.get());
+        modelAndView.addObject("person", new Person());
         return modelAndView;
     }
 }
