@@ -20,7 +20,7 @@ public class ClassType extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "personId", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "classType", fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST, targetEntity = Person.class)
     private Set<Person> personList;
 

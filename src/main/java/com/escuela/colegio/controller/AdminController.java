@@ -76,6 +76,7 @@ public class AdminController {
         Person person1 = personRepository.readByEmail(person.getEmail());
         if (person1 == null || !(person1.getPersonId() > 0)) {
             modelAndView.setViewName("redirect:/admin/displayStudents?classId=" + classType.getClassId() + "&error=true");
+            return modelAndView;
         }
         person1.setClassType(classType);
         personRepository.save(person1);
@@ -85,13 +86,14 @@ public class AdminController {
         return modelAndView;
     }
 
-    @PostMapping("/deleteStudent")
+    @GetMapping("/deleteStudent")
     public ModelAndView deleteStudent(Model model, @RequestParam int personId, HttpSession httpSession) {
         Optional<Person> person = personRepository.findById(personId);
         person.get().setClassType(null);
         ClassType classType = (ClassType) httpSession.getAttribute("classType");
         classType.getPersonList().remove(person.get());
-        httpSession.setAttribute("classType", classType);
+        ClassType classSaved = classesRepository.save(classType);
+        httpSession.setAttribute("classType", classSaved);
         ModelAndView modelAndView = new ModelAndView("redirect:/admin/displayStudents?classId=" + classType.getClassId());
         return modelAndView;
     }
