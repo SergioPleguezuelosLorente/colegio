@@ -9,6 +9,8 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @FieldsValueMatch.List({
@@ -23,7 +25,7 @@ import java.time.LocalDateTime;
                 message = "Email addresses do not match!"
         )
 })
-@Table(name="person")
+@Table(name = "person")
 public class Person extends BaseEntity {
 
     @Id
@@ -63,7 +65,7 @@ public class Person extends BaseEntity {
     @JoinColumn(name = "roleId", referencedColumnName = "role_id", nullable = false)
     private Roles roles;
 
-    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, targetEntity = Address.class)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Address.class)
     @JoinColumn(name = "addressId", referencedColumnName = "address_id", nullable = true)
     private Address address;
 
@@ -71,10 +73,21 @@ public class Person extends BaseEntity {
     @JoinColumn(name = "classId", referencedColumnName = "class_id")
     private ClassType classType;
 
+    @ManyToMany(mappedBy = "person", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable (name ="person_courses",
+            joinColumns = {
+                    @JoinColumn(name = "person_id", referencedColumnName = "personId")},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "course_id", referencedColumnName = "courseId")
+            }
+    )
+    private Set<Person> courses = new HashSet<>();
+
+
     public Person() {
     }
 
-    public Person(LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy, int personId, String name, String mobileNumber, String email, String confirmEmail, String pwd, String confirmPwd, Roles roles, Address address, ClassType classType) {
+    public Person(LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy, int personId, String name, String mobileNumber, String email, String confirmEmail, String pwd, String confirmPwd, Roles roles, Address address, ClassType classType, Set<Person> courses) {
         super(createdAt, createdBy, updatedAt, updatedBy);
         this.personId = personId;
         this.name = name;
@@ -86,7 +99,9 @@ public class Person extends BaseEntity {
         this.roles = roles;
         this.address = address;
         this.classType = classType;
+        this.courses = courses;
     }
+
 
     public int getPersonId() {
         return personId;
@@ -166,5 +181,13 @@ public class Person extends BaseEntity {
 
     public void setClassType(ClassType classType) {
         this.classType = classType;
+    }
+
+    public Set<Person> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Person> courses) {
+        this.courses = courses;
     }
 }
