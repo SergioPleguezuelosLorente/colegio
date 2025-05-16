@@ -151,4 +151,17 @@ public class AdminController {
         modelAndView.setViewName("redirect:/admin/viewStudents?id=" + courses.getCourseId());
         return modelAndView;
     }
+
+    @GetMapping("deleteStudentFromCourse")
+    public ModelAndView removeStudentFromCourse(Model mode, @RequestParam int personId, HttpSession httpSession) {
+        ModelAndView modelAndView = new ModelAndView();
+        Courses courses = (Courses) httpSession.getAttribute("courses");
+        Optional<Person> person = personRepository.findById(personId);
+        person.get().getCourses().remove(courses);
+        courses.getPersonList().remove(person);
+        personRepository.save(person.get());
+        httpSession.setAttribute("courses", courses);
+        modelAndView.setViewName("redirect:/admin/viewStudents?id=" + courses.getCourseId());
+        return modelAndView;
+    }
 }
