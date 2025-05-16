@@ -75,17 +75,17 @@ public class AdminController {
     }
 
     @PostMapping("/addStudent")
-    public ModelAndView addStudents(Model model, @ModelAttribute("person") Person person, HttpSession httpSession) {
+    public ModelAndView addStudents(Model model, @ModelAttribute("person") Person email, HttpSession httpSession) {
         ModelAndView modelAndView = new ModelAndView();
         ClassType classType = (ClassType) httpSession.getAttribute("classType");
-        Person person1 = personRepository.readByEmail(person.getEmail());
-        if (person1 == null || !(person1.getPersonId() > 0)) {
+        Person person = personRepository.readByEmail(email.getEmail());
+        if (person == null || !(person.getPersonId() > 0)) {
             modelAndView.setViewName("redirect:/admin/displayStudents?classId=" + classType.getClassId() + "&error=true");
             return modelAndView;
         }
-        person1.setClassType(classType);
-        personRepository.save(person1);
-        classType.getPersonList().add(person1);
+        person.setClassType(classType);
+        personRepository.save(person);
+        classType.getPersonList().add(person);
         classesRepository.save(classType);
         modelAndView.setViewName("redirect:/admin/displayStudents?classId=" + classType.getClassId());
         return modelAndView;
@@ -121,11 +121,17 @@ public class AdminController {
     }
 
     @GetMapping("/viewStudents")
-    public ModelAndView viewStudents(Model model, @RequestParam int id) {
+    public ModelAndView viewStudents(Model model, @RequestParam int id, HttpSession session, @RequestParam(required = false) String error) {
         ModelAndView modelAndView = new ModelAndView("course_students.html");
+        String errorMessage = null;
         Optional<Courses> courses = coursesRepository.findById(id);
         modelAndView.addObject("courses", courses.get());
         modelAndView.addObject("person", new Person());
+        session.setAttribute("courses", courses.get());
+        if (error != null) {
+            errorMessage = "Invalid email!";
+            modelAndView.addObject("errorMessage", errorMessage);
+        }
         return modelAndView;
     }
 }
