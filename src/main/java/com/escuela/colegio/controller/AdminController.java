@@ -140,7 +140,7 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView();
         Courses courses = (Courses) httpSession.getAttribute("courses");
         Person person = personRepository.readByEmail(email.getEmail());
-        if (person != null || person.getPersonId() < 0) {
+        if (person == null || person.getPersonId() < 0) {
             modelAndView.setViewName("redirect:/admin/viewStudents?id=" + courses.getCourseId() + "&error=true");
             return modelAndView;
         }
