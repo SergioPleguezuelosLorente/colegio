@@ -26,6 +26,7 @@ public class ProjectSecurityConfig {
                         .requestMatchers("/courses").permitAll()
                         .requestMatchers("/about").permitAll()
                         .requestMatchers("/assets/**").permitAll()
+                        .requestMatchers("/student/**").hasRole("STUDENT")
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/public/**").permitAll()
                         .requestMatchers("/logout").permitAll()
