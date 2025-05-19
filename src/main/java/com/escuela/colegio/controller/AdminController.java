@@ -8,6 +8,7 @@ import com.escuela.colegio.repository.CoursesRepository;
 import com.escuela.colegio.repository.PersonRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -106,7 +107,7 @@ public class AdminController {
     @GetMapping("/displayCourses")
     public ModelAndView displayCourses(Model model) {
         ModelAndView modelAndView = new ModelAndView("courses_secure.html");
-        List<Courses> courses = coursesRepository.findAll();
+        List<Courses> courses = coursesRepository.findAll(Sort.by("name").descending());
         modelAndView.addObject("courses", courses);
         model.addAttribute("course", new Courses());
         return modelAndView;
