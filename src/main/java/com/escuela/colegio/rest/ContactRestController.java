@@ -71,4 +71,21 @@ public class ContactRestController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @PatchMapping("/closeMsg")
+    public ResponseEntity<Response> closeMsg(@RequestBody Contact contactReq) {
+        Response response = new Response();
+        Optional<Contact> contact = contactRepository.findById(contactReq.getContactId());
+        if (contact.isPresent()) {
+            contact.get().setStatus(Constants.CLOSE);
+            contactRepository.save(contact.get());
+        } else {
+            response.setStatusCode("400");
+            response.setStatusMsg("Invalid Contact ID received");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+        response.setStatusCode("200");
+        response.setStatusMsg("Message successfully closed");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 }
