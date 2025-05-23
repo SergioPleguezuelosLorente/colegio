@@ -1,5 +1,6 @@
 package com.escuela.colegio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
@@ -18,18 +19,22 @@ public class BaseEntity {
 
     @CreatedDate
     @Column(name = "created_at")
+    @JsonIgnore
     private LocalDateTime createdAt;
 
     @CreatedBy
     @Column(name = "created_by")
+    @JsonIgnore
     private String createdBy;
 
     @LastModifiedDate
     @Column(name = "updated_at")
+    @JsonIgnore
     private LocalDateTime updatedAt;
 
     @LastModifiedBy
     @Column(name = "updated_by")
+    @JsonIgnore
     private String updatedBy;
 
     public BaseEntity(LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
