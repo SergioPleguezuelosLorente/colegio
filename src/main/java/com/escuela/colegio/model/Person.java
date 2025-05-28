@@ -2,6 +2,7 @@ package com.escuela.colegio.model;
 
 import com.escuela.colegio.annotation.FieldsValueMatch;
 import com.escuela.colegio.annotation.PasswordValidator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -49,16 +50,19 @@ public class Person extends BaseEntity {
     @NotBlank(message = "Please, confirm your email")
     @Email(message = "Please, confirm email address correctly")
     @Transient
+    @JsonIgnore
     private String confirmEmail;
 
     @NotBlank(message = "Password must not be blank")
     @Size(min = 5, message = "Password must be at least 5 characters long")
     @PasswordValidator
+    @JsonIgnore
     private String pwd;
 
     @NotBlank(message = "Please, confirm your password")
     @Size(min = 5, message = "Please, confirm your password correctly")
     @Transient
+    @JsonIgnore
     private String confirmPwd;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, targetEntity = Roles.class)
