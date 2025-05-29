@@ -78,7 +78,7 @@ public class Person extends BaseEntity {
     private ClassType classType;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinTable (name ="person_courses",
+    @JoinTable(name = "person_courses",
             joinColumns = {
                     @JoinColumn(name = "personId", referencedColumnName = "person_id")
             },

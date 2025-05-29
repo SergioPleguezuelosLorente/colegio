@@ -21,7 +21,8 @@ DB related operations and
 public interface ContactRepository extends JpaRepository<Contact, Integer> {
 
     List<Contact> findByStatus(String status);
-//    JPAQuery
+
+    //    JPAQuery
 //    @Query("SELECT c FROM Contact c WHERE c.status = :status")
 //    NativeQuery
     @Query(value = "SELECT * FROM contact_msg c WHERE c.status = :status", nativeQuery = true)
