@@ -38,4 +38,5 @@ public interface ContactRepository extends JpaRepository<Contact, Integer> {
     @Transactional
     @Modifying
     int updateMsgStatus(String status, int id);
+    
 }
