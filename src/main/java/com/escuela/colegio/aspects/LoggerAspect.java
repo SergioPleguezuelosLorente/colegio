@@ -1,11 +1,12 @@
 package com.escuela.colegio.aspects;
 
-import org.apache.juli.logging.Log;
+//import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.hibernate.validator.internal.util.logging.Log;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
