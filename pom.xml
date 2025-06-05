@@ -29,6 +29,7 @@
     <properties>
         <java.version>24</java.version>
         <spring-cloud.version>2024.0.1</spring-cloud.version>
+        <spring-boot-admin.version>3.5.0</spring-boot-admin.version>
     </properties>
     <dependencies>
 
@@ -106,6 +107,16 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-rest-hal-explorer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>3.3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-micrometer</artifactId>
+            <version>6.6.1.Final</version>
         </dependency>
     </dependencies>
 
